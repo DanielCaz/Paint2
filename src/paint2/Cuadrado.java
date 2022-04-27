@@ -33,6 +33,7 @@ public class Cuadrado extends Figura {
         Painter.dibujarLinea(bufferedImage, temp1, Matrices.sumar(temp1, z), Color.black);
         Painter.dibujarLinea(bufferedImage, vertices.getLast(), Matrices.sumar(vertices.getLast(), z), Color.black);
         Painter.dibujarLinea(bufferedImage, temp2, Matrices.sumar(temp2, z), Color.black);
+        this.z = z;
     }
 
     @Override
@@ -53,5 +54,6 @@ public class Cuadrado extends Figura {
         Painter.dibujarLinea(bufferedImage, temp1, Matrices.sumar(temp1, z), color);
         Painter.dibujarLinea(bufferedImage, vertices.getLast(), Matrices.sumar(vertices.getLast(), z), color);
         Painter.dibujarLinea(bufferedImage, temp2, Matrices.sumar(temp2, z), color);
+        this.z = z;
     }
 }

@@ -14,7 +14,7 @@ public abstract class Figura {
     protected LinkedList<Point> vertices;
     protected BufferedImage bufferedImage;
     protected boolean seleccionada;
-    private int z;
+    protected int z;
 
     public Figura(LinkedList<Point> puntos, BufferedImage bufferedImage) {
         this.vertices = puntos;

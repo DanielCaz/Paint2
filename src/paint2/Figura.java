@@ -14,24 +14,28 @@ public abstract class Figura {
     protected LinkedList<Point> vertices;
     protected BufferedImage bufferedImage;
     protected boolean seleccionada;
+    private int z;
 
     public Figura(LinkedList<Point> puntos, BufferedImage bufferedImage) {
         this.vertices = puntos;
         this.bufferedImage = bufferedImage;
         seleccionada = false;
+        z = 0;
     }
-
-    public void dibujar() {
-        Painter.dibujarPoligono(bufferedImage, vertices, Color.black);
+    
+    public void dibujar(int z) {
+        Painter.dibujarPoligono(bufferedImage, vertices, z, Color.black);
+        this.z = z;
     }
-
-    public void dibujar(Color color) {
-        Painter.dibujarPoligono(bufferedImage, vertices, color);
+    
+    public void dibujar(int z, Color color) {
+        Painter.dibujarPoligono(bufferedImage, vertices, z, color);
+        this.z = z;
     }
 
     public void rotar(int rotacion) {
         quitarCruz();
-        dibujar(Color.white);
+        dibujar(z, Color.white);
         Point centro = getCentro();
         for (int i = 0; i < vertices.size(); i++) {
             Point vertice = vertices.get(i);
@@ -55,7 +59,7 @@ public abstract class Figura {
             int y = (int) (r * Math.sin(Math.toRadians(nuevoAngulo)));
             vertices.set(i, new Point(centro.x + x, centro.y + y));
         }
-        dibujar();
+        dibujar(z);
         dibujarCruz();
     }
 
@@ -84,7 +88,7 @@ public abstract class Figura {
     public void trasladar(Point nuevoCentro) {
         quitarCruz();
         Point centro = getCentro();
-        dibujar(Color.white);
+        dibujar(z, Color.white);
         int xDist = nuevoCentro.x - centro.x;
         int yDist = nuevoCentro.y - centro.y;
 
@@ -92,17 +96,17 @@ public abstract class Figura {
             Point vertice = vertices.get(i);
             vertices.set(i, new Point(vertice.x + xDist, vertice.y + yDist));
         }
-        dibujar();
+        dibujar(z);
         dibujarCruz();
     }
 
     public void escalar(double escalamiento) {
         quitarCruz();
-        dibujar(Color.white);
+        dibujar(z, Color.white);
         for (int i = 0; i < vertices.size(); i++) {
             vertices.set(i, Matrices.multiplicar(vertices.get(i), escalamiento));
         }
-        dibujar();
+        dibujar(z);
         dibujarCruz();
     }
 
@@ -139,6 +143,6 @@ public abstract class Figura {
 
     public void quitarCruz() {
         Painter.dibujarCruz(bufferedImage, getCentro(), 5, Color.white);
-        dibujar();
+        dibujar(z);
     }
 }

@@ -32,14 +32,20 @@ public class Painter {
         }
     }
 
-    public static void dibujarPoligono(BufferedImage bufferedImage, LinkedList<Point> puntos, Color color) {
+    public static void dibujarPoligono(BufferedImage bufferedImage, LinkedList<Point> puntos, int z, Color color) {
         int i;
         for (i = 0; i < puntos.size() - 1; i++) {
             Point punto = puntos.get(i);
             dibujarLinea(bufferedImage, punto, puntos.get(i + 1), color);
+            
+            dibujarLinea(bufferedImage, Matrices.sumar(punto, z), Matrices.sumar(puntos.get(i + 1), z), color);
+            
+            dibujarLinea(bufferedImage, punto, Matrices.sumar(punto, z), color);
         }
 
+        dibujarLinea(bufferedImage, puntos.get(i), Matrices.sumar(puntos.get(i), z), color);
         dibujarLinea(bufferedImage, puntos.get(i), puntos.getFirst(), color);
+        dibujarLinea(bufferedImage, Matrices.sumar(puntos.get(i), z), Matrices.sumar(puntos.getFirst(), z), color);
     }
 
     public static void dibujarCruz(BufferedImage bufferedImage, Point centro, int tamano) {

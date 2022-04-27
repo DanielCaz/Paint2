@@ -44,7 +44,7 @@ public class DaniPaint extends javax.swing.JFrame {
         puntos.add(new Point(iconoTriangulo.getWidth() - padding, iconoTriangulo.getHeight() - padding));
         puntos.add(new Point(padding, iconoTriangulo.getHeight() - padding));
         Painter.llenarImagen(iconoTriangulo, Color.white);
-        Painter.dibujarPoligono(iconoTriangulo, puntos, Color.black);
+        Painter.dibujarPoligono(iconoTriangulo, puntos, (int) jSpinnerZ.getValue(), Color.black);
         jToggleButtonTriangulo.setIcon(new ImageIcon(iconoTriangulo));
 
         puntos.clear();
@@ -56,7 +56,7 @@ public class DaniPaint extends javax.swing.JFrame {
         puntos.add(1, new Point(puntos.getFirst().x, puntos.getLast().y));
         puntos.add(new Point(puntos.getLast().x, puntos.getFirst().y));
         Painter.llenarImagen(iconoCuadrado, Color.white);
-        Painter.dibujarPoligono(iconoCuadrado, puntos, Color.black);
+        Painter.dibujarPoligono(iconoCuadrado, puntos, (int) jSpinnerZ.getValue(), Color.black);
         jToggleButtonCuadrado.setIcon(new ImageIcon(iconoCuadrado));
 
         puntos.clear();
@@ -72,7 +72,7 @@ public class DaniPaint extends javax.swing.JFrame {
             puntos.add(new Point(centroCirculo.x + x, centroCirculo.y + y));
         }
         Painter.llenarImagen(iconoCirculo, Color.white);
-        Painter.dibujarPoligono(iconoCirculo, puntos, Color.black);
+        Painter.dibujarPoligono(iconoCirculo, puntos, (int) jSpinnerZ.getValue(), Color.black);
         jToggleButtonCirculo.setIcon(new ImageIcon(iconoCirculo));
 
         puntos.clear();
@@ -86,7 +86,7 @@ public class DaniPaint extends javax.swing.JFrame {
         puntos.add(new Point(padding, (int) (iconoPoligono.getHeight() * .4)));
         Point centroCruz = new Point(iconoPoligono.getWidth() / 2 - 15, iconoPoligono.getHeight() / 2 - 15);
         Painter.llenarImagen(iconoPoligono, Color.white);
-        Painter.dibujarPoligono(iconoPoligono, puntos, Color.black);
+        Painter.dibujarPoligono(iconoPoligono, puntos, (int) jSpinnerZ.getValue(), Color.black);
         Painter.dibujarLinea(iconoPoligono, new Point(centroCruz.x - 5, centroCruz.y), new Point(centroCruz.x + 5, centroCruz.y), Color.black);
         Painter.dibujarLinea(iconoPoligono, new Point(centroCruz.x, centroCruz.y - 5), new Point(centroCruz.x, centroCruz.y + 6), Color.black);
         jToggleButtonPoligono.setIcon(new ImageIcon(iconoPoligono));
@@ -122,6 +122,9 @@ public class DaniPaint extends javax.swing.JFrame {
         jLabelEscalar = new javax.swing.JLabel();
         jSpinnerEscalamiento = new javax.swing.JSpinner();
         jButtonEscalamiento = new javax.swing.JButton();
+        jPanelZ = new javax.swing.JPanel();
+        jLabelZ = new javax.swing.JLabel();
+        jSpinnerZ = new javax.swing.JSpinner();
 
         jOptionPaneVerticesPoligonos.setMessage("Número de vértices");
         jOptionPaneVerticesPoligonos.setMessageType(JOptionPane.
@@ -257,6 +260,32 @@ public class DaniPaint extends javax.swing.JFrame {
             }
         });
 
+        jLabelZ.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabelZ.setText("Z");
+
+        jSpinnerZ.setModel(new javax.swing.SpinnerNumberModel(0, 0, 999, 1));
+
+        javax.swing.GroupLayout jPanelZLayout = new javax.swing.GroupLayout(jPanelZ);
+        jPanelZ.setLayout(jPanelZLayout);
+        jPanelZLayout.setHorizontalGroup(
+            jPanelZLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelZLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelZLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelZ)
+                    .addComponent(jSpinnerZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelZLayout.setVerticalGroup(
+            jPanelZLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelZLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelZ)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinnerZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelHerramientasLayout = new javax.swing.GroupLayout(jPanelHerramientas);
         jPanelHerramientas.setLayout(jPanelHerramientasLayout);
         jPanelHerramientasLayout.setHorizontalGroup(
@@ -276,7 +305,8 @@ public class DaniPaint extends javax.swing.JFrame {
                             .addComponent(jButtonEscalamiento))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelGrados))
-                    .addComponent(jSpinnerEscalamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerEscalamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanelHerramientasLayout.setVerticalGroup(
@@ -302,7 +332,9 @@ public class DaniPaint extends javax.swing.JFrame {
                 .addComponent(jSpinnerEscalamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jButtonEscalamiento)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -389,7 +421,7 @@ public class DaniPaint extends javax.swing.JFrame {
                         return;
                     }
                     Triangulo triangulo = new Triangulo((LinkedList<Point>) linkedListPuntos.clone(), bufferedImage);
-                    triangulo.dibujar();
+                    triangulo.dibujar((int) jSpinnerZ.getValue());
                     figurasDibujadas.add(triangulo);
                     jLabelImagen.setIcon(new ImageIcon(bufferedImage));
                     linkedListPuntos.clear();
@@ -407,7 +439,7 @@ public class DaniPaint extends javax.swing.JFrame {
                         return;
                     }
                     Cuadrado cuadrado = new Cuadrado((LinkedList<Point>) linkedListPuntos.clone(), bufferedImage);
-                    cuadrado.dibujar();
+                    cuadrado.dibujar((int) jSpinnerZ.getValue());
                     figurasDibujadas.add(cuadrado);
                     jLabelImagen.setIcon(new ImageIcon(bufferedImage));
                     linkedListPuntos.clear();
@@ -425,7 +457,7 @@ public class DaniPaint extends javax.swing.JFrame {
                         return;
                     }
                     Circulo circulo = new Circulo((LinkedList<Point>) linkedListPuntos.clone(), bufferedImage);
-                    circulo.dibujar();
+                    circulo.dibujar((int) jSpinnerZ.getValue());
                     figurasDibujadas.add(circulo);
                     jLabelImagen.setIcon(new ImageIcon(bufferedImage));
                     linkedListPuntos.clear();
@@ -444,7 +476,7 @@ public class DaniPaint extends javax.swing.JFrame {
                         return;
                     }
                     Poligono poligono = new Poligono((LinkedList<Point>) linkedListPuntos.clone(), bufferedImage);
-                    poligono.dibujar();
+                    poligono.dibujar((int) jSpinnerZ.getValue());
                     figurasDibujadas.add(poligono);
                     jLabelImagen.setIcon(new ImageIcon(bufferedImage));
                     linkedListPuntos.clear();
@@ -551,12 +583,15 @@ public class DaniPaint extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelRotar;
     private javax.swing.JLabel jLabelTrasladar;
+    private javax.swing.JLabel jLabelZ;
     private javax.swing.JOptionPane jOptionPaneVerticesPoligonos;
     private javax.swing.JPanel jPanelFiguras;
     private javax.swing.JPanel jPanelHerramientas;
+    private javax.swing.JPanel jPanelZ;
     private javax.swing.JSlider jSliderGrados;
     private javax.swing.JSpinner jSpinnerEscalamiento;
     private javax.swing.JSpinner jSpinnerVertices;
+    private javax.swing.JSpinner jSpinnerZ;
     private javax.swing.JToggleButton jToggleButtonCirculo;
     private javax.swing.JToggleButton jToggleButtonCuadrado;
     private javax.swing.JToggleButton jToggleButtonPoligono;

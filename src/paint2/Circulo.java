@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,14 +17,14 @@ public class Circulo extends Figura {
     }
 
     @Override
-    public void dibujar() {
+    public void dibujar(int z) {
         int radio = (int) vertices.getFirst().distance(vertices.getLast());
         Point centro = vertices.getFirst();
         Painter.dibujarCirculo(bufferedImage, centro, radio, Color.black);
     }
 
     @Override
-    public void dibujar(Color color) {
+    public void dibujar(int z, Color color) {
         int radio = (int) vertices.getFirst().distance(vertices.getLast());
         Point centro = vertices.getFirst();
         Painter.dibujarCirculo(bufferedImage, centro, radio, Color.black);
@@ -31,6 +32,6 @@ public class Circulo extends Figura {
 
     @Override
     public void rotar(int rotacion) {
-        System.out.println("No rota pero igual ni se notaría jajja no me repruebe porfa :c");
+        JOptionPane.showMessageDialog(null, "👉 👈", "No rota pero igual ni se notaría jajja no me repruebe porfa :c", JOptionPane.INFORMATION_MESSAGE);
     }
 }

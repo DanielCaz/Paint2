@@ -90,6 +90,8 @@ public class DaniPaint extends javax.swing.JFrame {
         Painter.dibujarLinea(iconoPoligono, new Point(centroCruz.x - 5, centroCruz.y), new Point(centroCruz.x + 5, centroCruz.y), Color.black);
         Painter.dibujarLinea(iconoPoligono, new Point(centroCruz.x, centroCruz.y - 5), new Point(centroCruz.x, centroCruz.y + 6), Color.black);
         jToggleButtonPoligono.setIcon(new ImageIcon(iconoPoligono));
+        
+        jSpinnerZ.setValue(30);
     }
 
     /**
